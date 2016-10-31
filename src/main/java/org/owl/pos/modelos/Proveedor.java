@@ -1,6 +1,6 @@
 package org.owl.pos.modelos;
 import java.util.Date;
-public class Proveedor/*extends Persona*/{
+public class Proveedor extends Persona{
 	public Date fechaAlta;
 	public Date fechaBaja;
 	public char estado;
