@@ -8,6 +8,7 @@ package org.owl.pos.modelos.repositorios;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.owl.pos.modelos.Identificable;
 
 /**
@@ -39,7 +40,21 @@ public abstract class Repositorio {
      * @throws IllegalArgumentException cuando se intenta almacenar una entidad
      * que ya existe en el repositorio.
      */
-    public abstract void crear(Identificable entidad);
+    public void crear(Identificable entidad) {
+        if(entidad==null) {
+            throw new NullPointerException("No puede almacenarce una entidad nula.");
+        }
+        
+        if(entidad.getId()==null) {
+            generarIdentificacion(entidad);
+        }
+        
+        if(repositorio.containsKey(entidad.getId())) {
+            throw new IllegalArgumentException("Violación de restricción de unicidad.");
+        }
+        
+        repositorio.put(entidad.getId(), entidad);
+    }
 
     /**
      * Modifica una entidad identificable si existe en el repositorio.
@@ -49,7 +64,19 @@ public abstract class Repositorio {
      * @throws IllegalArgumentException si el identificador de la identidad es
      * nulo.
      */
-    public abstract void modificar(Identificable entidad);
+    public void modificar(Identificable entidad) {
+        if(entidad==null) {
+            throw new NullPointerException();
+        }
+        
+        if(entidad.getId()==null) {
+            throw new IllegalArgumentException("El identificador de entidad no debe ser nulo.");
+        }
+        
+        if(repositorio.containsKey(entidad.getId())) {
+            repositorio.replace(entidad.getId(), entidad);
+        }
+    }
 
     /**
      * Elimina una entidad identificable del repositorio.
@@ -59,7 +86,19 @@ public abstract class Repositorio {
      * @throws IllegalArgumentException si el identificador de la identidad es
      * nulo.
      */
-    public abstract void eliminar(Identificable entidad);
+    public void eliminar(Identificable entidad) {
+        if(entidad==null) {
+            throw new NullPointerException();
+        }
+        
+        if(entidad.getId()==null) {
+            throw new IllegalArgumentException("El identificador de entidad no debe ser nulo.");
+        }
+        
+        if(repositorio.containsKey(entidad.getId())) {
+            repositorio.remove(entidad.getId());
+        }
+    }
 
     /**
      * Busca una entidad en el repositrio a través de su identificador.
@@ -68,7 +107,13 @@ public abstract class Repositorio {
      * @return entidad encontrada o {@code null} si no existe.
      * @throws NullPointerException si el identificador de la identidad es nulo.
      */
-    public abstract Identificable obtener(Long id);
+    public Identificable obtener(Long id) {
+        if(id==null) {
+            throw new NullPointerException("El identificador de entidad no debe ser nulo.");
+        }
+        
+        return repositorio.get(id);
+    }
 
     /**
      * Realiza una búsqueda basada en un patrón de texto que coincida con el
@@ -76,8 +121,29 @@ public abstract class Repositorio {
      *
      * @param filtros {@code String} patrón de búsqueda.
      * @return
+     * @throws NullPointerException si el patrón de búsqueda es nulo
      */
-    public abstract List<Identificable> buscar(String filtros);
+    public List<Identificable> buscar(String filtros) {
+        if(filtros==null) {
+            throw new NullPointerException();
+        }
+        
+        return  repositorio.values().parallelStream()
+                          //ordenado por ID de forma ascendente
+                          .filter(e-> {
+                                        String valor = e.toString()
+                                                        .toLowerCase()
+                                                        .replaceAll(" ", "")
+                                                        .replace(",", "");
+                                        return valor
+                                                  .contains(filtros.replaceAll(" ", "")
+                                                                   .toLowerCase()
+                                                            );
+                                      })
+                          .sorted((o1,o2)->o1.getId().compareTo(o2.getId()))
+                          .collect(Collectors.toList());
+    }
+
 
     /**
      * Realiza una búsqueda paginada basada en un patrón que coincida con el
