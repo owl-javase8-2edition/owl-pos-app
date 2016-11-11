@@ -5,6 +5,7 @@
  */
 package org.owl.pos.modelos.repositorios;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -159,7 +160,27 @@ public abstract class Repositorio {
      * {@code indiceInicial}, incluído el mismo.
      * @return
      */
-    public abstract ListaPaginada buscar(String filtros, int indiceInicial, int cantidadElementos);
+    public  ListaPaginada buscar(String filtros, int indiceInicial, int cantidadElementos){
+       
+        List<Identificable> listaCompleta = this.buscar(filtros);
+       
+        int indiceFinal;
+        indiceFinal = indiceInicial + cantidadElementos -1;
+        
+        if ((listaCompleta.size()-indiceInicial)<cantidadElementos){
+             cantidadElementos = listaCompleta.size()-indiceInicial;
+            indiceFinal = listaCompleta.size() -1;
+        }
+        
+        List<Identificable> subLista = new ArrayList();
+        subLista = listaCompleta.subList(indiceInicial,indiceFinal);
+        
+     
+         ListaPaginada listaPaginada = new ListaPaginada(subLista,cantidadElementos);
+        
+        return listaPaginada;
+        
+    }
 
     /**
      * Debe generar una identificación única para los objetos del repositorio.
