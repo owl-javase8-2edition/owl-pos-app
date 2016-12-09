@@ -14,7 +14,7 @@ import java.util.Date;
 public class Cliente extends Persona{
    public Date fechaAlta;
    public Date fechaBaja;
-   public char estado;
+   public Character estado;
    
    public Date getfechaAlta (){
        return fechaAlta;
@@ -30,10 +30,11 @@ public class Cliente extends Persona{
        this.fechaBaja = fechaBaja;
    }
    
-   public char getEstado (){
+   public Character getEstado (){
        return estado;
    }
-   public void setEstado (char Estado){
+   
+   public void setEstado (Character estado){
        this.estado = estado;
    }
 }

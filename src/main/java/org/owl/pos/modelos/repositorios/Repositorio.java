@@ -5,6 +5,7 @@
  */
 package org.owl.pos.modelos.repositorios;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,13 +24,14 @@ import org.owl.pos.modelos.Identificable;
  * {@link https://docs.oracle.com/javase/8/docs/api/java/util/Map.html}
  *
  * @author raphapy
+ * @param <E> el tipo identificable
  */
-public abstract class Repositorio {
+public abstract class Repositorio<E extends Identificable> {
 
     /*
         En esta estrucura de datos almacenamos todos los Ítems
      */
-    private final Map<Long, Identificable> repositorio = new HashMap<>();
+    private final Map<Long, E> repositorio = new HashMap<>();
 
     /**
      * Almacena un objeto identificable en el repositorio. No permite almacenar
@@ -40,7 +42,7 @@ public abstract class Repositorio {
      * @throws IllegalArgumentException cuando se intenta almacenar una entidad
      * que ya existe en el repositorio.
      */
-    public void crear(Identificable entidad) {
+    public void crear(E entidad) {
         if(entidad==null) {
             throw new NullPointerException("No puede almacenarce una entidad nula.");
         }
@@ -64,7 +66,7 @@ public abstract class Repositorio {
      * @throws IllegalArgumentException si el identificador de la identidad es
      * nulo.
      */
-    public void modificar(Identificable entidad) {
+    public void modificar(E entidad) {
         if(entidad==null) {
             throw new NullPointerException();
         }
@@ -86,7 +88,7 @@ public abstract class Repositorio {
      * @throws IllegalArgumentException si el identificador de la identidad es
      * nulo.
      */
-    public void eliminar(Identificable entidad) {
+    public void eliminar(E entidad) {
         if(entidad==null) {
             throw new NullPointerException();
         }
@@ -107,7 +109,7 @@ public abstract class Repositorio {
      * @return entidad encontrada o {@code null} si no existe.
      * @throws NullPointerException si el identificador de la identidad es nulo.
      */
-    public Identificable obtener(Long id) {
+    public E obtener(Long id) {
         if(id==null) {
             throw new NullPointerException("El identificador de entidad no debe ser nulo.");
         }
@@ -123,7 +125,7 @@ public abstract class Repositorio {
      * @return
      * @throws NullPointerException si el patrón de búsqueda es nulo
      */
-    public List<Identificable> buscar(String filtros) {
+    public List<E> buscar(String filtros) {
         if(filtros==null) {
             throw new NullPointerException();
         }
@@ -159,7 +161,7 @@ public abstract class Repositorio {
      * {@code indiceInicial}, incluído el mismo.
      * @return
      */
-    public abstract ListaPaginada buscar(String filtros, int indiceInicial, int cantidadElementos);
+    public abstract ListaPaginada<E> buscar(String filtros, int indiceInicial, int cantidadElementos);
 
     /**
      * Debe generar una identificación única para los objetos del repositorio.
@@ -170,5 +172,14 @@ public abstract class Repositorio {
      *
      * @param entidad
      */
-    protected abstract void generarIdentificacion(Identificable entidad);
+    protected abstract void generarIdentificacion(E entidad);
+    
+    /**
+     * Obtiene todos los elementos del repositorio
+     * 
+     * @return 
+     */
+    public List<E> listarTodos() {
+        return new ArrayList<>(repositorio.values());
+    }
 }
