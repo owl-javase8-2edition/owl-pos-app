@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="652.0" prefWidth="1225.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.owl.pos.controladores.ControladorClientes">
+   <children>
+      <AnchorPane fx:id="paneCrud" layoutY="91.0" opacity="0.0" prefHeight="560.0" prefWidth="1225.0" style="-fx-background-color: white;" onKeyPressed="#saveOnEnter" >
+         <children>
+            <Button fx:id="btnBack" layoutX="29.0" layoutY="13.0" mnemonicParsing="false" onAction="#clickOnBtnBack" prefHeight="40.0" prefWidth="40.0" stylesheets="@../css/buttonCircleBlack.css">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/arrowLeftBlack.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Label fx:id="lblId" alignment="CENTER_RIGHT" layoutX="105.0" layoutY="36.0" prefHeight="17.0" prefWidth="79.0" text="*ID Cliente :" textFill="#b22121" />
+            <TextField fx:id="txtId" disable="true" editable="false" layoutX="192.0" layoutY="31.0" promptText="Autogenerado" />
+            <Label text="Nombre :" alignment="CENTER_RIGHT" layoutX="62.0" layoutY="72.0" prefHeight="17.0" prefWidth="122.0" />
+            <TextField fx:id="txtNombre" layoutX="192.0" layoutY="65.0" prefHeight="26.0" prefWidth="414.0" promptText="Nombre" />
+            <Label fx:id="lblApellido" alignment="CENTER_RIGHT" layoutX="62.0" layoutY="107.0" prefHeight="17.0" prefWidth="122.0" text="Apellido :" />
+            <TextField fx:id="txtApellido" layoutX="192.0" layoutY="101.0" prefHeight="26.0" prefWidth="414.0" promptText="Apellido" />
+            <Label fx:id="lblRazonSocial" alignment="CENTER_RIGHT" layoutX="62.0" layoutY="142.0" prefHeight="17.0" prefWidth="122.0" text="Razón Social :" />
+            <TextField fx:id="txtRazonSocial" layoutX="192.0" layoutY="137.0" prefHeight="27.0" prefWidth="414.0" promptText="Razón Social" />
+            <Label fx:id="lblRuc" alignment="CENTER_RIGHT" layoutX="62.0" layoutY="177.0" prefHeight="17.0" prefWidth="122.0" text="RUC :" />
+            <TextField fx:id="txtRuc" layoutX="192.0" layoutY="172.0" prefHeight="27.0" prefWidth="414.0" promptText="RUC" />
+            <Label fx:id="lblNumeroDocumento" alignment="CENTER_RIGHT" layoutX="86.0" layoutY="199.0" prefHeight="33.0" prefWidth="98.0" text="Número Documento :" textAlignment="RIGHT" wrapText="true" />
+            <TextField fx:id="txtNumeroDocumento" layoutX="192.0" layoutY="207.0" prefHeight="27.0" prefWidth="414.0" promptText="Número Documento" />
+            <Label fx:id="lblDireccion" alignment="CENTER_RIGHT" layoutX="62.0" layoutY="243.0" prefHeight="17.0" prefWidth="122.0" text="Dirección :" />
+            <TextArea fx:id="txtDireccion" layoutX="192.0" layoutY="243.0" prefHeight="63.0" prefWidth="414.0" promptText="Dirección" />
+            <Label fx:id="lblTelefono" alignment="CENTER_RIGHT" layoutX="62.0" layoutY="320.0" prefHeight="17.0" prefWidth="122.0" text="Teléfono :" />
+            <TextField fx:id="txtTelefono" layoutX="192.0" layoutY="315.0" onKeyReleased="#keyState" prefHeight="27.0" prefWidth="414.0" promptText="Teléfono" />
+            <Label fx:id="lblEmail" alignment="CENTER_RIGHT" layoutX="62.0" layoutY="355.0" prefHeight="17.0" prefWidth="122.0" text="E-mail :" />
+            <TextField fx:id="txtEmail" layoutX="192.0" layoutY="350.0" prefHeight="27.0" prefWidth="414.0" promptText="E-mail" />
+            <Label fx:id="lblSexo" alignment="CENTER_RIGHT" layoutX="62.0" layoutY="389.0" prefHeight="17.0" prefWidth="122.0" text="Sexo :" />
+            <ComboBox fx:id="cbxSexo" layoutX="192.0" layoutY="385.0" prefHeight="26.0" prefWidth="414.0" promptText="Seleccione Sexo">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Femenino" />
+                        <String fx:value="Masculino" />
+                        <String fx:value="Otro" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <Label fx:id="lblEdad" alignment="CENTER_RIGHT" layoutX="62.0" layoutY="425.0" prefHeight="17.0" prefWidth="122.0" text="Edad :" />
+            <TextField fx:id="txtEdad" layoutX="192.0" layoutY="420.0" prefHeight="27.0" prefWidth="414.0" promptText="Edad" />
+            <Label fx:id="lblEstado" alignment="CENTER_RIGHT" layoutX="62.0" layoutY="460.0" prefHeight="17.0" prefWidth="122.0" text="Estado :" />
+            <ComboBox fx:id="cbxEstado" layoutX="192.0" layoutY="456.0" prefHeight="26.0" prefWidth="414.0" promptText="Seleccione Estado">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Activo" />
+                        <String fx:value="Inactivo" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <Button fx:id="btnGuardar" layoutX="507.0" layoutY="492.0" mnemonicParsing="false" onAction="#clickOnBtnGuardar" prefHeight="27.0" prefWidth="98.0" styleClass="btn" text="Guardar" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneTabel" layoutY="91.0" opacity="0.0" prefHeight="560.0" prefWidth="1225.0">
+         <children>
+            <TableView fx:id="tableData" layoutX="7.0" layoutY="7.0" onMouseClicked="#clickOnTableData" prefHeight="546.0" prefWidth="1226.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="7.0">
+              <columns>
+                  <TableColumn fx:id="colAccion" prefWidth="130.0" text="ACCION">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                <TableColumn fx:id="colId" prefWidth="135.0" text="ID">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colNombre" prefWidth="152.0" text="NOMBRE">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colApellido" prefWidth="137.0" text="APELLIDO">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colRazonSocial" prefWidth="200.0" text="RAZON SOCIAL">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colRuc" prefWidth="250.0" text="RUC">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colNumeroDocumento" prefWidth="250.0" text="NRO. DOCUMENTO">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colDireccion" prefWidth="200.0" text="DIRECCION">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colTelefono" prefWidth="200.0" text="TELEFONO">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colEmail" prefWidth="170.0" text="EMAIL">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colSexo" prefWidth="170.0" text="SEXO">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colEdad" prefWidth="200.0" text="EDAD">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colFechaAlta" prefWidth="200.0" text="FECHA ALTA">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="colFechaBaja" prefWidth="200.0" text="FECHA BAJA">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" opacity="0.49" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../img/tabel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <Separator layoutY="89.0" prefHeight="0.0" prefWidth="1225.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Text fill="#2b579a" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clientes">
+         <font>
+            <Font name="Segoe UI Semilight" size="48.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnNew" defaultButton="true" layoutX="1101.0" layoutY="46.0" mnemonicParsing="false" onAction="#clickOnBtnNew" prefHeight="27.0" prefWidth="108.0" styleClass="btn" text="Nuevo Cliente" />
+      <ImageView fx:id="imgLoad" fitHeight="33.0" fitWidth="40.0" layoutX="250.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../img/301.GIF" />
+         </image>
+      </ImageView>
+      <ProgressBar fx:id="bar" layoutY="82.0" prefHeight="3.0" prefWidth="1225.0" progress="0.0" />
+   </children>
+</AnchorPane>

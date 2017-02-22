@@ -6,7 +6,6 @@
 package org.owl.pos.modelos.repositorios;
 
 import java.util.List;
-import org.owl.pos.modelos.Identificable;
 
 /**
  * Esta clase representa una lista de objetos Identificables. Provee datos
@@ -15,12 +14,12 @@ import org.owl.pos.modelos.Identificable;
  *
  * @author raphapy
  */
-public class ListaPaginada {
+public class ListaPaginada<T> {
 
     private int totalDatos;
-    private List<Identificable> lista;
+    private List<T> lista;
 
-    public ListaPaginada(List<Identificable> lista, int totalDatos) {
+    public ListaPaginada(List<T> lista, int totalDatos) {
         this.lista = lista;
         this.totalDatos = totalDatos;
     }
@@ -42,14 +41,14 @@ public class ListaPaginada {
     /**
      * @return the lista
      */
-    public List<Identificable> getLista() {
+    public List<T> getLista() {
         return lista;
     }
 
     /**
      * @param lista the lista to set
      */
-    public void setLista(List<Identificable> lista) {
+    public void setLista(List<T> lista) {
         this.lista = lista;
     }
 }
